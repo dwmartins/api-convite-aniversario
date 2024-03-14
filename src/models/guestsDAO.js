@@ -22,6 +22,18 @@ class GuestsDAO {
             throw new Error(error);
         }
     }
+
+    findAll = async () => {
+        const sql = `SELECT * FROM ${this.table}`;
+
+        try {
+            const result = await this.conn.query(sql);
+            return result[0];
+        } catch (error) {
+            logger.log(`error`, `Falha ao buscar os convidados: ${error}`);
+            throw new Error(error);
+        }
+    }
 }
 
 module.exports = new GuestsDAO();

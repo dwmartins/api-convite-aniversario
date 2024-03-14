@@ -10,8 +10,8 @@ class NewTablePeoples {
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     name VARCHAR(50) NOT NULL,
                     number_people INT,
-                    createdAt DATETIME,
-                    updatedAt DATETIME
+                    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
                 );`
             );
         } catch (error) {
