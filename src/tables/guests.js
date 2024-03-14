@@ -3,10 +3,10 @@ const logger = require("../../config/logger");
 const helperDate = require("../utilities/helpersDate");
 
 class NewTablePeoples {
-    async peoples() {
+    async guests() {
         try {
             await db.pool.query(`
-                CREATE TABLE IF NOT EXISTS peoples (
+                CREATE TABLE IF NOT EXISTS guests (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     name VARCHAR(50) NOT NULL,
                     number_people INT,
@@ -15,13 +15,13 @@ class NewTablePeoples {
                 );`
             );
         } catch (error) {
-            logger.log(`error`, `Falha ao criar a tabela (peoples): ${error}`);
+            logger.log(`error`, `Falha ao criar a tabela (guests): ${error}`);
         }
     }
 
     async createAll() {
-        console.log(`${helperDate.getFullDateTime()} - Criando tabela de (peoples)...`)
-        await this.peoples();
+        console.log(`${helperDate.getFullDateTime()} - Criando tabela de (guests)...`)
+        await this.guests();
     }
 }
 

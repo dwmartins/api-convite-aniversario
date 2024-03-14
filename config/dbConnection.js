@@ -8,7 +8,7 @@ class DBConnection {
         this.checkConnection();
     }
 
-    async checkConnection() {
+    checkConnection = async () => {
         try {
             await this.pool.query('SELECT 1+1');
         } catch (error) {
@@ -16,7 +16,7 @@ class DBConnection {
         }
     }
 
-    getErrorConnection(error) {
+    getErrorConnection = (error) => {
         switch (error) {
             case 'ER_BAD_DB_ERROR':
                 logger.log('error', `O banco de dados '${config.db.database}' não foi encontrado.`);

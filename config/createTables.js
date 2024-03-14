@@ -1,15 +1,15 @@
 const logger = require("./logger");
 const helper = require("../src/utilities/helpersDate");
-const tablePeoples = require("../src/tables/peoples");
+const tableGuests = require("../src/tables/guests");
 
 class CreateTables {
-    async peoples() {
-        await tablePeoples.createAll();
+    guests = async () => {
+        await tableGuests.createAll();
     }
 
     createAll = async () => {
         console.log(`${helper.getFullDateTime()} - Preparando a criação das Tabelas... `);
-        await this.peoples();
+        await this.guests();
         console.log(`${helper.getFullDateTime()} - Finalizando a criação das tabelas. `);
     }
 }
