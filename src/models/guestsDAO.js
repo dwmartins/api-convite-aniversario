@@ -23,6 +23,23 @@ class GuestsDAO {
         }
     }
 
+    updateDAO = async (guests) => {
+        const guestsId = guests.id;
+        delete guests.id;
+        const fields = Object.keys(guests).join(' = ?, ') + ' = ?';
+        
+        const sql = `UPDATE ${this.table} SET ${fields} WHERE id = ?`;
+        let values = [...Object.values(guests), guestsId];
+
+        try {
+            await this.conn.query(sql, values);
+            return true;
+        } catch (error) {
+            logger.log(`error`,`Falha ao atualizar o convidado no banco: ${error.code}`);
+            throw new Error(error);
+        }
+    }
+
     findAll = async () => {
         const sql = `SELECT * FROM ${this.table}`;
 

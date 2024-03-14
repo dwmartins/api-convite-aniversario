@@ -42,6 +42,17 @@ class Guests {
         
         return response;
     }
+
+    update = async () => {
+        let plainObject = Object.fromEntries(
+            Object.entries(this).filter(([key, value]) => typeof value !== 'function')
+        );
+
+        delete plainObject.createdAt;
+        delete plainObject.updatedAt;
+
+        return await guestsDAO.updateDAO(plainObject);
+    }
 }
 
 module.exports = Guests;
