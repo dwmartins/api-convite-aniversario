@@ -61,10 +61,6 @@ class Guests {
 
         return await guestsDAO.updateDAO(plainObject);
     }
-
-    delete = async () => {
-        return await guestsDAO.deleteDAO(this.getId());
-    }
 }
 
 module.exports = Guests;

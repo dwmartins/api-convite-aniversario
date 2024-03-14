@@ -43,8 +43,8 @@ class GuestsCtrl {
 
     delete = async (req, res) => {
         try {
-            const guest = new Guests(req.body);
-            await guest.delete();
+            const guestsId = parseInt(req.params.id);
+            await guestsDAO.deleteDAO(guestsId);
             return this.sendResponse(res, 201, {success: "Convidado deletado com sucesso."});
         } catch (error) {
             return this.sendResponse(res, 500, {erro: `Falha ao deletar o convidado`});
