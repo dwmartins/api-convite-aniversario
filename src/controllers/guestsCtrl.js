@@ -2,6 +2,7 @@ const Guests = require("../class/Guests");
 const guestsDAO = require("../models/guestsDAO");
 const helperString = require("../utilities/helperString");
 const validator = require("../utilities/validator");
+const sendEmailCtrl  = require("./sendEmailCtrl");
 
 class GuestsCtrl {
 
@@ -15,6 +16,7 @@ class GuestsCtrl {
 
             guests.setName(helperString.firstLetterCapitalizedAll(guests.getName()));
             await guests.save();
+            sendEmailCtrl.newGuests(guests.getName(), guests.getEscorts());
 
             return this.sendResponse(res, 201, {success: "Confirmação de presença salva com sucesso."});
         } catch (error) {
@@ -36,6 +38,16 @@ class GuestsCtrl {
             return this.sendResponse(res, 201, {success: "Convidado atualizado com sucesso."});
         } catch (error) {
             return this.sendResponse(res, 500, {erro: `Falha ao atualizar o convidado`});
+        }
+    }
+
+    delete = async (req, res) => {
+        try {
+            const guest = new Guests(req.body);
+            await guest.delete();
+            return this.sendResponse(res, 201, {success: "Convidado deletado com sucesso."});
+        } catch (error) {
+            return this.sendResponse(res, 500, {erro: `Falha ao deletar o convidado`});
         }
     }
 

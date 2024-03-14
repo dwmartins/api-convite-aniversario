@@ -4,7 +4,7 @@ class Guests {
     constructor (guests) {
         this.id             = guests.id;
         this.name           = guests.name;
-        this.number_people  = guests.number_people;
+        this.escorts        = guests.escorts;
         this.createdAt      = guests.createdAt;
         this.updatedAt      = guests.updatedAt;
     }
@@ -19,6 +19,14 @@ class Guests {
 
     setName = (name) => {
         this.name = name;
+    }
+
+    getEscorts = () => {
+        return this.escorts
+    }
+
+    setEscorts = (escorts) => {
+        this.escorts = escorts;
     }
 
     getCreatedAt = () => {
@@ -52,6 +60,10 @@ class Guests {
         delete plainObject.updatedAt;
 
         return await guestsDAO.updateDAO(plainObject);
+    }
+
+    delete = async () => {
+        return await guestsDAO.deleteDAO(this.getId());
     }
 }
 

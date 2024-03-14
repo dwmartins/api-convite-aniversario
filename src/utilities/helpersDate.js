@@ -8,7 +8,7 @@ class Helper {
         const minutes = String(data.getMinutes()).padStart(2, '0');
         const seconds = String(data.getSeconds()).padStart(2, '0');
     
-        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
     }
 }
 

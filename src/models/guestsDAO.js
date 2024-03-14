@@ -18,7 +18,7 @@ class GuestsDAO {
         try {
             return await this.conn.query(sql, values);
         } catch (error) {
-            logger.log(`error`,`Falha ao inserir o convidado no banco: ${error.code}`);
+            logger.log(`error`,`Falha ao inserir o convidado no banco: ${error}`);
             throw new Error(error);
         }
     }
@@ -35,7 +35,20 @@ class GuestsDAO {
             await this.conn.query(sql, values);
             return true;
         } catch (error) {
-            logger.log(`error`,`Falha ao atualizar o convidado no banco: ${error.code}`);
+            logger.log(`error`,`Falha ao atualizar o convidado no banco: ${error}`);
+            throw new Error(error);
+        }
+    }
+
+    deleteDAO = async (id) => { 
+        try {
+            const sql = `DELETE FROM ${this.table} WHERE id = ?`;
+            const value = [id];
+
+            await this.conn.query(sql, value);
+            return true;
+        } catch (error) {
+            logger.log(`error`, `Falha ao deletar o convidado: ${error}`);
             throw new Error(error);
         }
     }
